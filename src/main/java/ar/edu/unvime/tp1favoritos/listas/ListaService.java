@@ -108,13 +108,7 @@ public class ListaService {
     }
 
     private void validarPropiedadOAdmin(Lista lista, Usuario usuario) {
-        if (usuarioActualService.esAdmin(usuario)) {
-            return;
-        }
-
-        if (lista.usuarioId() == null || !lista.usuarioId().equals(usuario.id())) {
-            throw new AccesoDenegadoException("No tiene permisos para operar sobre la lista con id " + lista.id());
-        }
+        usuarioActualService.validarPropiedadOAdmin(usuario, lista.usuarioId(), lista.id());
     }
 
     private Lista buscarOFallar(Long id) {

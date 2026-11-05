@@ -44,6 +44,7 @@ class ListaServiceImplTest {
     @BeforeEach
     void setUp() {
         usuarioAutenticado = new Usuario(10L, "usuario@test.com", "hash123", "USER");
+        lenient().doCallRealMethod().when(usuarioActualService).validarPropiedadOAdmin(any(), any(), any());
     }
 
     @Test

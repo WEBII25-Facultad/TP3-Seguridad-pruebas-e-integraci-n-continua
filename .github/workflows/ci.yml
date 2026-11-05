@@ -2,15 +2,7 @@ name: CI - Integración Continua
 
 on:
   push:
-    branches:
-      - main
-      - master
-      - tp3
   pull_request:
-    branches:
-      - main
-      - master
-      - tp3
 
 jobs:
   build:

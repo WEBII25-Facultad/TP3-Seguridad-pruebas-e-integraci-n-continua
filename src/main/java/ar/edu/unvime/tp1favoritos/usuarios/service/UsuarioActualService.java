@@ -30,4 +30,14 @@ public class UsuarioActualService {
     public boolean esAdmin(Usuario usuario) {
         return usuario != null && "ADMIN".equalsIgnoreCase(usuario.rol());
     }
+
+    public void validarPropiedadOAdmin(Usuario usuario, Long propietarioId, Long listaId) {
+        if (esAdmin(usuario)) {
+            return;
+        }
+
+        if (propietarioId == null || !propietarioId.equals(usuario.id())) {
+            throw new AccesoDenegadoException("No tiene permisos para operar sobre la lista con id " + listaId);
+        }
+    }
 }
