@@ -51,4 +51,28 @@ public class GlobalExceptionHandler {
         detalle.setDetail(e.getMessage());
         return detalle;
     }
+
+    @ExceptionHandler(EmailYaRegistradoException.class)
+    public ProblemDetail manejarEmailYaRegistrado(EmailYaRegistradoException e) {
+        ProblemDetail detalle = ProblemDetail.forStatus(HttpStatus.CONFLICT);
+        detalle.setTitle("Conflicto de registro");
+        detalle.setDetail(e.getMessage());
+        return detalle;
+    }
+
+    @ExceptionHandler(CredencialesInvalidasException.class)
+    public ProblemDetail manejarCredencialesInvalidas(CredencialesInvalidasException e) {
+        ProblemDetail detalle = ProblemDetail.forStatus(HttpStatus.UNAUTHORIZED);
+        detalle.setTitle("No autorizado");
+        detalle.setDetail(e.getMessage());
+        return detalle;
+    }
+
+    @ExceptionHandler(AccesoDenegadoException.class)
+    public ProblemDetail manejarAccesoDenegado(AccesoDenegadoException e) {
+        ProblemDetail detalle = ProblemDetail.forStatus(HttpStatus.FORBIDDEN);
+        detalle.setTitle("Acceso denegado");
+        detalle.setDetail(e.getMessage());
+        return detalle;
+    }
 }

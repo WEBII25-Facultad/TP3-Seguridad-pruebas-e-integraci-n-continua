@@ -1,0 +1,35 @@
+name: CI - Integración Continua
+
+on:
+  push:
+    branches:
+      - main
+      - master
+      - tp3
+  pull_request:
+    branches:
+      - main
+      - master
+      - tp3
+
+jobs:
+  build:
+    name: Build & Verify (Unit + Integration Tests)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del código fuente
+        uses: actions/checkout@v4
+
+      - name: Configurar Java JDK 25 (Temurin)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '25'
+          cache: 'maven'
+
+      - name: Dar permisos de ejecución al Maven Wrapper
+        run: chmod +x mvnw
+
+      - name: Ejecutar pruebas unitarias y de integración (Surefire + Failsafe)
+        run: ./mvnw -B verify
